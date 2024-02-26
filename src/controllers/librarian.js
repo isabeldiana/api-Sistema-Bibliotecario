@@ -7,7 +7,7 @@ const registerLibrarian =   async(req,res) =>{
 const {nome, idade, telefone, email,senha}= req.body
 try {
 const unencryptedPass = await bcrypt.hash(senha, 10);
-const newUser = await pool.query('insert into users (nome, idade, telefone, email,senha) values ($1,$2,$3,$4,$5)returning *',[nome, idade, telefone, email,unencryptedPass]  )
+const newUser = await pool.query('insert into librarian (nome, idade, telefone, email,senha) values ($1,$2,$3,$4,$5)returning *',[nome, idade, telefone, email,unencryptedPass]  )
 return res.status(201).json(newUser.rows[0])
 } catch (error) {
   return res.status(500).json({message:"Erro interno do servidor"})
@@ -16,7 +16,7 @@ return res.status(201).json(newUser.rows[0])
 const loginLibrarian = async (req, res) => {
 const {email, senha} = req.body
 try {
-  const userEmail = await pool.query("select * from users where email=$1",[email])
+  const userEmail = await pool.query("select * from librarian where email=$1",[email])
   if (userEmail.rowCount <1){
     return res.status(401).json({message:"Email ou a senha não conferem"})
   }
@@ -37,9 +37,8 @@ try {
 const displayLogin = async (req, res) => {
   const {id}=req.params
  try {
-  const user = await pool.query("select * from users where id= $1",[id])
-
-
+  const user = await pool.query("select * from librarian where id= $1",[id])
+console.log(user);
   if(user.rowCount <1){
     return res.status(404).json({message: "Usuario não existente"})
   }
@@ -61,20 +60,20 @@ const updateLibrarian = async(req,res)=>{
   const {id}=req.params;
   const {nome, idade, telefone, email,senha}= req.body;
  try {
-  const user = await pool.query("select * from users where id =$1",[id])
+  const user = await pool.query("select * from librarian where id =$1",[id])
   if(user.rowCount < 1){
     return res.status(40).json({message:"usuario não existe"})
   }
-  const emailUser = await pool.query("select * from users where email =$1",[email])
+  const emailUser = await pool.query("select * from librarian where email =$1",[email])
   
   if(emailUser.rowCount >=1){
     return res.status(409).json({message:"Já existe email para este usuario"})
   }
 
   const unencryptedPass =  await bcrypt.hash(senha, 10)
-  const updateLibrarian = await pool.query("update users set nome=$1,idade=$2, email=$3, telefone=$4, senha=$5 where id=$6 returning id, nome,idade, email,telefone",[nome, idade, email,telefone,unencryptedPass,id])
+  const updateLibrarian = await pool.query("update librarian set nome=$1,idade=$2, email=$3, telefone=$4, senha=$5 where id=$6 returning id, nome,idade, email,telefone",[nome, idade, email,telefone,unencryptedPass,id])
 
- return res.status(201).json(updateUser.rows[0])
+ return res.status(201).json(updateLibrarian .rows[0])
  } catch (error) {
   return res.status(500).json({message:"Erro interno do servidor"})
  }
