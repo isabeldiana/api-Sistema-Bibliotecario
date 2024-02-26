@@ -15,7 +15,7 @@ const loanBooks = async(req,res)=>{
 
     
 
-    if(book.rows[0].estoque < quantidade){
+    if(book.rows[0].estoque < quantidade ){
       return res.status(400).json({message:"Estoque insuficiente"})
 
     }

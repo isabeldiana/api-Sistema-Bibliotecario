@@ -5,6 +5,7 @@ const { registerBooks, displayBook } = require('./controllers/books');
 const librarian = require('./controllers/librarian');
 const { registerUser } = require('./controllers/users');
 const { loanBooks } = require('./controllers/loan_books');
+const { devolution } = require('./controllers/devolution_books');
 
 const routers = express()
 
@@ -19,5 +20,6 @@ routers.post('/book', registerBooks),
 routers.get('/books', displayBook),
 routers.post('/user', registerUser),
 routers.post('/loan', loanBooks),
+routers.post('/devolution', devolution),
 
 module.exports = routers
