@@ -12,12 +12,12 @@ const filter = async(req,res,next)=>{
   const token = authorization.split(' ')[1];
     try {
     const {id} = jwt.verify(token, hash)
-    const { rows, rowCount } = await pool.query('select * from users where id = $1', [id] )
+    const { rows, rowCount } = await pool.query('select * from librarian where id = $1', [id] )
         
 
-    if (rowCount< 1) {
+    if (rowCount< 1) { 
     
-        return res.status(401).json({mensagem: "Usuario Não Existe"});
+        return res.status(401).json({mensagem: "Usuario não Existe"});
     }
     
     const {senha, ...usuario } = rows[0]
