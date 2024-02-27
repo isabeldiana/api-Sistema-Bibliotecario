@@ -27,6 +27,7 @@ const loanBooks = async(req,res)=>{
     const stock = await pool.query("update books set estoque = estoque - $1 where id =$2 returning *",[quantidade,id_livro])
     
     result ={
+      id_emprestimo:newLoan.rows[0].id,
       nome: user.rows[0].nome,
       id_livro, 
       titulo: book.rows[0].titulo,
