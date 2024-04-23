@@ -1,40 +1,45 @@
-### Sistema Bibliotecario
+# API Node
 
+## Descrição
 
-#### Informações Gerais
+Este é um projeto de uma API Node desenvolvida para um sistema bibliotecário.
 
-* Sistema de gerancimento de emprestimos aos estudantes. ok 
-* Gerenciamento de obras e estoque dos livros. ok 
-* Emprestimos. ok 
-* Devoluções. ok 
-* Pendencias. ok
+## Tecnologias Utilizadas
 
- ----
-#### Adm do sistema
+- **Express**: Um framework web rápido, flexível e minimalista para Node.js.
+- **bcrypt**: Uma biblioteca para hash de senhas.
+- **dotenv**: Um módulo para carregar variáveis de ambiente a partir de um arquivo `.env`.
+- **jsonwebtoken**: Uma implementação de JSON Web Tokens (JWT).
+- **pg**: Um cliente PostgreSQL para Node.js.
+- **swagger-ui-express**: Middleware Express para servir a interface do Swagger UI.
 
- * ver os dados do seu perfil e editar os dados do seu perfil. ok
- * Criar cadastro dos alunos ao sistema. ok
- * Criar cadastro dos livros e alimentar o estoque. ok
- * Verificação situação do aluno cadastral do aluno. ok
- * Verificação data de emprestimo do aluno. ok
- 
- ----
+## Como Executar
 
-#### Livro
+1. **Instalação do Node.js**: Certifique-se de ter o Node.js instalado em seu sistema. Você pode baixá-lo em [nodejs.org](https://nodejs.org/).
 
-* Data da publicao, informações em geral. ok
-* Disponibilidade em estoque. ok
-  
- ----
+2. **Clone do Repositório**: Clone este repositório para o seu ambiente local:
 
-### emprestimo
-- id de quem pegou, ok
-- subtracao ao estoque de livros, ok
-- data do emprestimo.ok
-- situacao em processo, finalizado ok
+    ```bash
+    git clone https://github.com/isabeldiana/api-node.git
+    ```
 
-### devolucao
-- id do emprestimo.
-- soma ao estoque de livros, data da devolucao. 
-- colocar status de emprestimo como finalizado
+3. **Instalação de Dependências**: Instale as dependências do projeto:
 
+    ```bash
+    cd api-node
+    npm install
+    ```
+
+4. **Configuração do Ambiente**: Crie um arquivo `.env` na raiz do projeto e adicione as configurações do ambiente conforme o exemplo fornecido no arquivo `env.example`.
+
+5. **Execução do Servidor**: Execute o servidor de desenvolvimento:
+
+    ```bash
+    npm run dev
+    ```
+
+6. **Acesso à API**: Acesse a API em `http://localhost:3001`.
+
+## Contribuição
+
+Sinta-se à vontade para contribuir com melhorias neste projeto. Basta abrir uma issue ou enviar um pull request.
