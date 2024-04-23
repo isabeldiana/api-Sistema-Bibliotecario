@@ -1,26 +1,19 @@
 
 create database biblioteca;
 create table librarian (
-  id serial,
+  id serial PRIMARY KEY,
 nome text, idade integer, telefone integer, email varchar(255), senha varchar(255)
 );
 create table users (
-  id serial,
+  id serial PRIMARY KEY,
   nome text, idade integer, telefone integer, email varchar(255)
-)
+);
 create table books(
   
-  id serial,
+  id serial PRIMARY KEY,
   titulo text,
-autor text, quantidade integer,estoque integer, numero_paginas integer, data_publicao date ,editora text)
-
-create table users (
-  id serial,
-  nome text, idade integer, telefone integer, email varchar(255)
-)
-
-
-
+autor text, quantidade integer,estoque integer, numero_paginas integer, data_publicao date ,editora text
+);
 CREATE TABLE loan_books (
     id SERIAL PRIMARY KEY,
     usuario_id INT REFERENCES users(id),
@@ -37,7 +30,7 @@ CREATE TABLE devolution (
   quantidade INTEGER,
     data_devolucao DATE,
     situacao TEXT
-);
+)
 
 
 
