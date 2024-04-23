@@ -35,11 +35,20 @@ try {
 }
 }
 const displayLogin = async (req, res) => {
-  const {id}=req.params
+const authorization = req.headers.authorization;
+  const token = authorization.split(' ')[1];
+  function decodeToken(token) {
+    return jwt.verify(token, hash);
+}
  try {
-  const user = await pool.query("select * from librarian where id= $1",[id])
-console.log(user);
-  if(user.rowCount <1){
+  
+  const payload = decodeToken(token)
+  const userId = payload.id;
+
+ 
+  const user = await pool.query("select * from librarian where id= $1",[userId])
+
+  if(user <1){
     return res.status(404).json({message: "Usuario não existente"})
   }
   const result = {
@@ -51,27 +60,35 @@ console.log(user);
   }
   return res.status(200).json(result)
  } catch (error) {
-  console.log(error);
   return res.status(500).json({message:"Error interno do servidor"})
  }
 
 }
 const updateLibrarian = async(req,res)=>{
-  const {id}=req.params;
   const {nome, idade, telefone, email,senha}= req.body;
  try {
-  const user = await pool.query("select * from librarian where id =$1",[id])
-  if(user.rowCount < 1){
-    return res.status(40).json({message:"usuario não existe"})
-  }
+  const authorization = req.headers.authorization;
+  const token = authorization.split(' ')[1];
+  function decodeToken(token) {
+    return jwt.verify(token, hash);
+}
+const payload = decodeToken(token)
+const userId = payload.id;
+
+
+const user = await pool.query("select * from librarian where id= $1",[userId])
+
+if(user <1){
+  return res.status(404).json({message: "Usuario não existente"})
+}
   const emailUser = await pool.query("select * from librarian where email =$1",[email])
   
   if(emailUser.rowCount >=1){
-    return res.status(409).json({message:"Já existe email para este usuario"})
+    return res.status(409).json({message:"Este email já está cadastrado"})
   }
 
   const unencryptedPass =  await bcrypt.hash(senha, 10)
-  const updateLibrarian = await pool.query("update librarian set nome=$1,idade=$2, email=$3, telefone=$4, senha=$5 where id=$6 returning id, nome,idade, email,telefone",[nome, idade, email,telefone,unencryptedPass,id])
+  const updateLibrarian = await pool.query("update librarian set nome=$1,idade=$2, email=$3, telefone=$4, senha=$5 where id=$6 returning id, nome,idade, email,telefone",[nome, idade, email,telefone,unencryptedPass,userId])
 
  return res.status(201).json(updateLibrarian .rows[0])
  } catch (error) {

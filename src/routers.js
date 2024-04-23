@@ -10,15 +10,15 @@ const { devolution } = require('./controllers/devolution_books');
 const routers = express()
 
 routers.post('/librarian', librarian.registerLibrarian),
-routers.post('/librarian/:id', librarian.loginLibrarian),
+routers.post('/librarian/login', librarian.loginLibrarian),
 
 routers.use(filter)
 
-routers.get('/librarian/:id', librarian.displayLogin),
-routers.put('/librarian/:id', librarian.updateLibrarian),
+routers.get('/librarian', librarian.displayLogin),
+routers.put('/librarian', librarian.updateLibrarian),
 routers.post('/book', registerBooks),
 routers.get('/books', displayBook),
-routers.post('/user', registerUser),
+routers.post('/user/client', registerUser),
 routers.post('/loan', loanBooks),
 routers.post('/devolution', devolution),
 
