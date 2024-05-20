@@ -20,13 +20,13 @@ Este é um projeto de uma API Node desenvolvida para um sistema bibliotecário.
 2. **Clone do Repositório**: Clone este repositório para o seu ambiente local:
 
     ```bash
-    git clone https://github.com/isabeldiana/api-node.git
+    git https://github.com/isabeldiana/api-Sistema-Bibliotecario
     ```
 
 3. **Instalação de Dependências**: Instale as dependências do projeto:
 
     ```bash
-    cd api-node
+    cd api-Sistema-Bibliotecario
     npm install
     ```
 
